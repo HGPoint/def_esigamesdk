@@ -1,0 +1,20 @@
+local function appsflyer_callback(self, message_id, message)
+    if message_id == appsflyer.CONVERSION_DATA_SUCCESS then
+        print("Conversion data loaded:");
+        pprint(message);
+    elseif message_id == appsflyer.CONVERSION_DATA_FAIL then
+        print("Conversion data loading failed:", message.error);
+    end
+end
+
+function init(self)
+    if appsflyer then
+        appsflyer.set_debug_log(true)
+        appsflyer.set_customer_user_id("test_user_id")
+        appsflyer.set_callback(appsflyer_callback)
+        appsflyer.start_sdk()
+        timer.delay(5, false, function()
+            appsflyer.log_event("test_event", { one = "one", two = 2 })
+        end)
+    end
+end
