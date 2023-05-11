@@ -1,4 +1,7 @@
 [project]
-title = IOSKeychainStorage
+title = def_esigamesdk
 version = 1.0
+
+[library]
+include_dirs = esigamesdk
 
